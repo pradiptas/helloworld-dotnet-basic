@@ -7,9 +7,9 @@ jobs:
   test:
     description: Setup and run application tests
     executor:
-    name: windows/default
-    docker:
-      - image: microsoft/dotnet:sdk
+      name: windows/default
+    # docker:
+    #   - image: microsoft/dotnet:sdk
     steps:
       - checkout
       - restore_cache:
@@ -45,9 +45,6 @@ jobs:
       - image: microsoft/dotnet:sdk
     steps:
       - checkout
-      # - run:
-      #     name: Install Docker client
-      #     command: apt install docker-ce
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
