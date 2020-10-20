@@ -40,7 +40,7 @@ jobs:
           command: dotnet.exe build --configuration Release
   docker_hub_build_push_image:
     docker:
-      - image: microsoft/aspnetcore-build:3.0
+      - image: microsoft/aspnetcore-build:latest
     steps:
       - checkout
       - setup_remote_docker:
