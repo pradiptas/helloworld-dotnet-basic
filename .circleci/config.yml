@@ -5,9 +5,11 @@ orbs:
 
 jobs:
   test:
-    description: Setup and run application tests
-    executor:
-      name: windows/default
+    #description: Setup and run application tests
+    # executor:
+    #   name: windows/default
+    docker:
+      - image: microsoft/dotnet:sdk
     steps:
       - checkout
       - restore_cache:
