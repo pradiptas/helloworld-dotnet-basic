@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   windows: circleci/windows@2.2.0
+  aws-ecr: circleci/aws-ecr@4.0.1
 
 jobs:
   test:
@@ -65,5 +66,12 @@ workflows:
           requires:
             - test
       - docker_hub_build_push_image:
+          requires:
+            - build
+      - aws-ecr/build_and_push_image:
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: ${CIRCLE_PROJECT_REPONAME}
+          tag: ${CIRCLE_BUILD_NUM}
           requires:
             - build
