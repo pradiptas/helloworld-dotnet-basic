@@ -43,6 +43,9 @@ jobs:
       - image: microsoft/aspnetcore-build:latest
     steps:
       - checkout
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
