@@ -38,10 +38,30 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+  docker_hub_build_push_image:
+    docker:
+      - image: microsoft/dotnet:3.1-sdk
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
+          name: Build and push Docker image to Docker Hub
+          command: |
+            echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> ${BASH_ENV}
+            echo 'export IMAGE_NAME=${CIRCLE_PROJECT_REPONAME}' >> ${BASH_ENV}
+            source ${BASH_ENV}
+            docker build -t ${DOCKER_LOGIN}/${IMAGE_NAME} -t ${DOCKER_LOGIN}/${IMAGE_NAME}:${TAG} .
+            echo ${DOCKER_PWD} | docker login -u ${DOCKER_LOGIN} --password-stdin
+            docker push ${DOCKER_LOGIN}/${IMAGE_NAME}
+            
 workflows:
-  test_and_build:
+  build_test_deploy:
     jobs:
       - test
       - build:
           requires:
             - test
+      - docker_hub_build_push_image:
+          requires:
+            - build
