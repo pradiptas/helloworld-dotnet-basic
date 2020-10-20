@@ -40,12 +40,12 @@ jobs:
           command: dotnet.exe build --configuration Release
   docker_hub_build_push_image:
     docker:
-      - image: microsoft/aspnetcore-build:latest
+      - image: microsoft/dotnet:sdk
     steps:
       - checkout
-      - run:
-          name: Install Docker client
-          command: apt install docker-ce
+      # - run:
+      #     name: Install Docker client
+      #     command: apt install docker-ce
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
