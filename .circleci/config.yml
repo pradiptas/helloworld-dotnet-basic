@@ -45,7 +45,7 @@ jobs:
       - checkout
       - run:
           name: Install Docker client
-          command: sudo apt install docker-ce
+          command: apt install docker-ce
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
