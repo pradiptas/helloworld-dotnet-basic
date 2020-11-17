@@ -31,8 +31,8 @@ jobs:
           command: pwd
       - store_artifacts:
           path: C:\Users\psanyal\Documents\GitHub\helloworld-dotnet-basic\test_coverage  
-      - store_test_result:
-          path: C:\Users\psanyal\Documents\GitHub\helloworld-dotnet-basic\test_result
+      # - store_test_result:
+      #     path: C:\Users\psanyal\Documents\GitHub\helloworld-dotnet-basic\test_result
       
   build:
     description: Build application with Release configuration
