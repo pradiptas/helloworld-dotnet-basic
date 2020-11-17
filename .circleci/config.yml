@@ -26,8 +26,13 @@ jobs:
       - run:
           name: "Run Application Tests"
           command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Generate Dummy artifacts"
+          command: | 
+           mkdir -p /tmp/dummy_dumps
+           cp *.html /tmp/dummy_dumps
       - store_artifacts:
-          path: /tmp/artifacts
+          path: /tmp/dummy_dumps
       - run:
           name: "Print Working Directory"
           command: pwd
